@@ -88,6 +88,8 @@ echo "%PACKER_BUILDER_TYPE%" | findstr /i "virtualbox" >nul
 if not errorlevel 1 goto virtualbox
 echo "%PACKER_BUILDER_TYPE%" | findstr /i "parallels" >nul
 if not errorlevel 1 goto parallels
+echo "%PACKER_BUILDER_TYPE%" | findstr /i "hyperv" >nul
+if not errorlevel 1 goto hyperv
 echo ==^> ERROR: Unknown PACKER_BUILDER_TYPE: "%PACKER_BUILDER_TYPE%"
 pushd .
 goto exit1
@@ -254,6 +256,11 @@ echo ==^> Cleaning up Parallels Tools install
 del /F /S /Q "%PARALLELS_DIR"
 echo ==^> Removing "%PARALLELS_ISO_PATH"
 del /F "%PARALLELS_ISO_PATH"
+goto :exit0
+
+::::::::::::
+:hyperv
+::::::::::::
 goto :exit0
 
 :exit0
